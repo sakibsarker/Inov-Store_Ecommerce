@@ -1,11 +1,11 @@
 import './App.css';
-
-
+import { Allroutes } from './routes/Allroutes';
+import {Header,Footer} from './components'
 function App() {
   return (<>
-<div>
-  hello
-</div>
+  <Header/>
+  <Allroutes/>
+  <Footer/>
   </>
     
   );
