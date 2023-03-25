@@ -1,9 +1,12 @@
+import HeroSec from './components/HeroSec'
+import FeaturedProduct from './components/FeaturedProduct'
 export const HomePage = () => {
   return (
     <main>
-        <div>
-           <h2>Home Page</h2>
-        </div>
+        <HeroSec/>
+        <FeaturedProduct/>
     </main>
   )
 }
+
+                  
