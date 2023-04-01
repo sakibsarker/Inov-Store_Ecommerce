@@ -5,7 +5,8 @@ const FeaturedProduct = () => {
   const [products,setProduct]=useState([]);
   useEffect(()=>{
     async function fetchproduct(){
-      const res=await fetch("http://localhost:8000/products")
+     
+      const res=await fetch("http://localhost:8000/featured_products")
       const data=await res.json()
       setProduct(data)
     }
