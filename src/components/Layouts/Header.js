@@ -9,7 +9,9 @@ export const Header = () => {
     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
         <Link to="/" className="flex items-center">
             <img src={Logo} className="h-6 mr-3 sm:h-9" alt="InovBook Store" />
+            
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Store</span>
+            <Link to="/productslist" className="text-center">Shop page</Link>
         </Link>
         <div className="flex items-center">
             <span className='class="bi bi-gear-wide mr-5 text-xl text-gray-500 dark:text-white cursor-pointer'></span>
