@@ -13,27 +13,52 @@ const ProductScreen = () => {
   console.log(product)
   return (
     <>
-      <Link className='btn btn-dark my-3' to='/'>
+      <Link className='btn btn-white my-2' to='/'>
         Go Back</Link>
         <Row>
           <Col md={5}>
           <Image src={product.image} alt={product.image} fluid/>
           </Col>
           <Col md={4}>
-          <Card.Title as="div" className='product-title'>
-              <strong>{product.name}</strong>
-            </Card.Title>
-            </Col>
-            <Col md={9}>
-            <Card.Text as="div">
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <h3>{product.name}</h3>
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
-            </Card.Text>
+              </ListGroup.Item>
+              <ListGroup.Item>
+              <strong>${product.price}</strong>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <p>Description: {product.description}</p>
+                </ListGroup.Item>
+              </ListGroup>
             </Col>
-            <Col md={9}>
-            <Card.Text as="h5">
-                ${product.price}
-            </Card.Text>
-              </Col>
+            <Col md={3}>
+              <Card>
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Price:</Col>
+                      <Col><strong>${product.price}</strong></Col>
+                    </Row>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      <Row>
+                      <Col>Status:</Col>
+                      <Col>
+                      <strong>${product.countInStock>0?'In Stock':'Out Of Stock'}</strong></Col>
+                      </Row>
+                      <ListGroup.Item>
+                        <Button className='btn-block' type='button' disabled={product.countInStock===0}>
+                          Add To Cart
+                        </Button>
+                      </ListGroup.Item>
+                    </ListGroup.Item>
+                </ListGroup>
+              </Card>
+            </Col>
          
         </Row>
     </>
