@@ -7,7 +7,7 @@ const HomeScreen = () => {
   const [products,setProducts]=useState([])
   useEffect(()=>{
     const fetchProducts=async()=>{
-      const{data}=await axios.get(`${import.meta.env.VITE_SOME_KEY}/api/products/`);
+      const{data}=await axios.get(`${import.meta.env.VITE_API_URL}/api/products/`);
       setProducts(data)
     };
     fetchProducts();

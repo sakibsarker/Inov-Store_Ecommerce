@@ -10,7 +10,7 @@ const ProductScreen = () => {
   const{id:productId}=useParams()
   useEffect(()=>{
     const fetchProducts=async()=>{
-      const{data}=await axios.get(`${import.meta.env.VITE_SOME_KEY}/api/products/${productId}`);
+      const{data}=await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${productId}`);
       setProducts(data)
     };
     fetchProducts();
