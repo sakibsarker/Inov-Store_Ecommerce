@@ -14,7 +14,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ProductScreen from './screens/ProductScreen'
-
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
@@ -30,6 +29,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
     <RouterProvider router={router}/>
     </Provider>
-
   </React.StrictMode>,
 )

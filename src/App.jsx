@@ -2,6 +2,7 @@ import './App.css'
 import Header from './components/Header'
 import { Container } from 'react-bootstrap'
 import Footer from './components/Footer'
+import { productsApiSlice } from './slices/productsApiSlice'
 import {Outlet} from 'react-router-dom'
 
 function App() {
@@ -9,9 +10,13 @@ function App() {
     <>
     <Header/>
     <main className="py-3">
+     
+
+      
       <Container>
       <Outlet/>
       </Container>
+      
       </main>
     <Footer/>
     </>
