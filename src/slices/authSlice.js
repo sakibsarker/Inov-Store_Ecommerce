@@ -11,10 +11,14 @@ const authSlice=createSlice({
         setCredentials:(state,aciton)=>{
             state.userInfo=aciton.payload
             localStorage.setItem('userInfo',JSON.stringify(aciton.payload))
+        },
+        logout:(state,aciton)=>{
+            state.userInfo=null;
+            localStorage.removeItem('userInfo');
         }
     }
 })
 
-export const{setCredentials}=authSlice.actions;
+export const{setCredentials,logout}=authSlice.actions;
 
 export default authSlice.reducer
