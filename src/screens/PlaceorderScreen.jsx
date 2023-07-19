@@ -25,7 +25,23 @@ const PlaceorderScreen = () => {
   },[cart.shippingAddress.address,cart.paymentMethod,navigate]);
 
   const placeOrderHandler=async()=>{
-    console.log('submit')
+    try{
+      const res=await createOrder({
+        orderItems:cart.orderItems,
+        shippingAddress:cart.shippingAddress,
+        paymentMethod:cart.paymentMethod,
+        itemsPrice:cart.itemsPrice,
+        shippingPrice:cart.shippingPrice,
+        taxPrice:cart.taxPrice,
+        totalPrice:cart.totalPrice,
+      }).unwrap();
+      dispatch(clearCartItems);
+      navigate(`/orders/${res._id}`);
+
+    }catch(error){
+      toast.error(error.message)
+
+    }
   }
 
   return (
@@ -110,7 +126,7 @@ const PlaceorderScreen = () => {
             </Row>
           </ListGroup.Item>
           <ListGroup.Item>
-            {error && <Message variant='danger'>{error}</Message>}
+            {error && <Message variant='danger'>{error.message}</Message>}
           </ListGroup.Item>
           <ListGroup.Item>
             <Button type='button' className='btn-block' 

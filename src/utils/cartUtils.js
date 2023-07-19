@@ -6,12 +6,12 @@ export const updateCart=(state)=>{
       //calculate item price
       state.itemsPrice=addDecimal(state.cartItems.reduce((acc,item)=>acc+item.price*item.qty,0));
       //calculate shipping
-      state.ShippingPrice=addDecimal((state.itemsPrice>100?0.00:0.10).toFixed(2));
+      state.shippingPrice=addDecimal((state.itemsPrice>100?0.00:0.10).toFixed(2));
       //calculate tax
       state.taxPrice=addDecimal(Number((0.15*state.itemsPrice).toFixed(2)));
       //calcuate total price
       state.totalPrice=(
-          Number(state.itemsPrice)+Number(state.ShippingPrice)+Number(state.taxPrice)
+          Number(state.itemsPrice)+Number(state.shippingPrice)+Number(state.taxPrice)
       ).toFixed(2)
 
       localStorage.setItem('cart',JSON.stringify(state))
