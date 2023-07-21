@@ -27,7 +27,7 @@ const PlaceorderScreen = () => {
   const placeOrderHandler=async()=>{
     try{
       const res=await createOrder({
-        orderItems:cart.orderItems,
+        orderItems:cart.cartItems,
         shippingAddress:cart.shippingAddress,
         paymentMethod:cart.paymentMethod,
         itemsPrice:cart.itemsPrice,
@@ -105,7 +105,7 @@ const PlaceorderScreen = () => {
             <Row>
               <Col>Shipping:</Col>
               <Col>
-              TK {cart.ShippingPrice}
+              TK {cart.shippingPrice}
               </Col>
             </Row>
           </ListGroup.Item>
@@ -130,7 +130,7 @@ const PlaceorderScreen = () => {
           </ListGroup.Item>
           <ListGroup.Item>
             <Button type='button' className='btn-block' 
-            disabled={cart.cartItems===0}
+            disabled={cart.cartItems.length===0}
              onClick={placeOrderHandler}>Place Order</Button>
           </ListGroup.Item>
         </ListGroup>
