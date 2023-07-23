@@ -35,10 +35,11 @@ const PlaceorderScreen = () => {
         taxPrice:cart.taxPrice,
         totalPrice:cart.totalPrice,
       }).unwrap();
-      dispatch(clearCartItems);
-      navigate(`/orders/${res._id}`);
+      dispatch(clearCartItems());
+      navigate(`/order/${res._id}`);
 
     }catch(error){
+      console.log(error)
       toast.error(error.message)
 
     }
