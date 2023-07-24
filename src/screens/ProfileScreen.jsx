@@ -115,9 +115,7 @@ const ProfileScreen = () => {
                 <td>{order.isPaid?(
                     order.paidAt.substring(0,10)
                 ):(<FaTimes color='red'/>)}</td>
-                <td>{order.isDelivered?(
-                    order.isDelivered.substring(0,10)
-                ):(<FaTimes color='red'/>)}</td>
+                <td>{order.isDelivered?(order.deliveredAt.substring(0,10)):(<FaTimes color='red'/>)}</td>
                 <td>
                     <LinkContainer to={`/order/${order._id}`}>
                     {order.isPaid?(
