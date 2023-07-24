@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import {useGetOrderDetailsQuery,useCreateOrderMutation,useGetPayPalClientIdQuery, usePayOrderMutation} from '../slices/orderApiSlice';
+import {useGetOrderDetailsQuery,useGetPayPalClientIdQuery, usePayOrderMutation,useDeliverOrderMutation} from '../slices/orderApiSlice';
 
 const OrderScreen = () => {
     const {id:orderId}=useParams();
@@ -17,6 +17,7 @@ const OrderScreen = () => {
     const [payOrder,{isLoading:loadingPay}]=usePayOrderMutation();
     const [{isPending},paypalDispatch]=usePayPalScriptReducer();
     const {data:paypal,isLoading:loadingPayPal,error:errorPayPal}=useGetPayPalClientIdQuery();
+    const [deliverOrder,{isLoading:loadingDeliver,error:errorDeliver}]=useDeliverOrderMutation();
     const {userInfo}=useSelector((state)=>state.auth);
 
     useEffect(()=>{
@@ -76,8 +77,18 @@ const OrderScreen = () => {
       });
     };
     
-    
+    const deliverOrderHandler=async()=>{
+      try{
+        await deliverOrder(orderId);
+        refetch();
+        toast.success('Order delivered')
 
+      }catch(error){
+        toast.error(error?.data?.message||error.message);
+
+      }
+
+    }
 
 
     return isLoading?<Loader/>
@@ -169,8 +180,15 @@ const OrderScreen = () => {
               )
             }
 
-            {/* Pay Order */}
-          </ListGroup>
+           {loadingDeliver && <Loader/>}
+           {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered &&(
+            <ListGroup.Item>
+              <Button type='button' className='btn btn-block' onClick={deliverOrderHandler}>
+                Make as Delivered
+              </Button>
+            </ListGroup.Item>
+           ) }
+          </ListGroup>/
         </Card>
       </Col>
     </Row>
