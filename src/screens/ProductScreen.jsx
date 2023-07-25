@@ -10,6 +10,7 @@ import Message from '../components/Message'
 import { useDispatch } from 'react-redux'
 
 
+
 const ProductScreen = () => {
   const{id:productId}=useParams()
 
@@ -34,6 +35,7 @@ const ProductScreen = () => {
     
         <Row>
           <Col md={5}>
+          {/* <Image src={`http://localhost:5000${products.image}`} alt={products.name} fluid/> */}
           <Image src={products.image} alt={products.image} fluid/>
           </Col>
           <Col md={4}>
