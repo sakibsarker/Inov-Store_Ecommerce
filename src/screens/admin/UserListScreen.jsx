@@ -31,14 +31,19 @@ const  UserListScreen = () => {
     }
   }
 
-  const updateHandler=()=>{
-    console.log('update')
-  }
 
 
   return <>
-
-  <h1>Users List</h1>
+  <Row className="align-items-center">
+      <Col>
+        <h1>User List</h1>
+      </Col>
+      <Col className="text-end">
+        <Button className="btn-sm m-3">
+        <FaEdit/> Create User
+        </Button>
+      </Col>
+    </Row>
   {loadingDelete && <Loader/>}
   {isLoading?<Loader/>
   :error?<Message variant="Danger">{error?.data?.message||error.message}</Message>
@@ -65,11 +70,22 @@ const  UserListScreen = () => {
                 <td>{!user.isAdmin?(
                     (<FaTimes color='red'/>)
                 ):(<FaCheck color='green'/>)}</td>
+
+
                 <td>
-                    <LinkContainer to={`admin/user/${user._id}/edit`}>
-                        <Button className='btn-sm ' variant='light'><FaEdit color='green'/> Edit</Button>         
-                    </LinkContainer>
-                    <Button variant='light' className='btn-sm mx-2' onClick={()=>deleteHandler(user._id)}><FaTrash color='red'/></Button>
+                {/* {!user.isAdmin?(<>
+                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                   <Button className='btn-sm ' variant='light'><FaEdit color='green'/> Edit</Button>         
+               </LinkContainer>
+               <Button variant='light' className='btn-sm mx-2' onClick={()=>deleteHandler(user._id)}><FaTrash color='red'/></Button>
+               </>
+                ):(<FaTimes color='red'/>)} */}
+
+<LinkContainer to={`/admin/user/${user._id}/edit`}>
+                   <Button className='btn-sm ' variant='light'><FaEdit color='green'/> Edit</Button>         
+               </LinkContainer>
+               <Button variant='light' className='btn-sm mx-2' onClick={()=>deleteHandler(user._id)}><FaTrash color='red'/></Button>
+                    
                 </td>
             </tr>
         ))}
