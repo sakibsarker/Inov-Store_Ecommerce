@@ -10,7 +10,7 @@ import Message from '../components/Message'
 import { useDispatch,useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-
+import Meta from '../components/Meta';
 
 const ProductScreen = () => {
   const{id:productId}=useParams()
@@ -61,7 +61,7 @@ const ProductScreen = () => {
     {isLoading?(<Loader/>):error?(<Message variant='danger'>{error?.data?.message||error.error}</Message>)
     :(
     <>
-    
+    <Meta title={products.name}/>
         <Row>
           <Col md={5}>
           <Image src={`http://localhost:5000${products.image}`} alt={products.name} fluid/>

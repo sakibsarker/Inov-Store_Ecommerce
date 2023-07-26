@@ -1,14 +1,15 @@
 import React from 'react'
 import './assets/styles/bootstrap.custom.css'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
+import store from './store'
+import {HelmetProvider} from 'react-helmet-async'
 import App from './App'
 import './index.css'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
-import { Provider } from 'react-redux'
-import { PayPalScriptProvider } from '@paypal/react-paypal-js'
-import store from './store'
 import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
 import {
@@ -67,11 +68,14 @@ const router=createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <HelmetProvider>
+
     <Provider store={store}>
       <PayPalScriptProvider deferLoading={true}>
       <RouterProvider router={router}/>
       </PayPalScriptProvider>
-   
     </Provider>
+    
+    </HelmetProvider>
   </React.StrictMode>,
 )
