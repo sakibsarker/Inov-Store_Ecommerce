@@ -8,10 +8,13 @@ import {useGetProductsQuery,useCreateProductMutation,useDeleteProductMutation} f
 import { useSelector,useDispatch } from 'react-redux/';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-
+import { useParams } from 'react-router-dom';
+import Paginate from '../../components/Paginate';
 const ProductListScreen = () => {
 
-  const {data:products,isLoading,error,refetch} =useGetProductsQuery();
+  const {pageNumber}=useParams();
+
+  const {data,isLoading,error,refetch} =useGetProductsQuery({pageNumber});
   const [createProduct,{isLoading:loadingCreate}] =useCreateProductMutation();
   const [deleteProduct,{isLoading:loadingDelete}] =useDeleteProductMutation();
 
@@ -74,19 +77,19 @@ const ProductListScreen = () => {
         </tr>
         </thead>
         <tbody>
-          {products.map((product)=>(
-            <tr key={product._id}>
-              <td>{product._id}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.category}</td>
-              <td>{product.brand}</td>
-              <td>{product.countInStock}</td>
+          {data.product.map((productt)=>(
+            <tr key={productt._id}>
+              <td>{productt._id}</td>
+              <td>{productt.name}</td>
+              <td>{productt.price}</td>
+              <td>{productt.category}</td>
+              <td>{productt.brand}</td>
+              <td>{productt.countInStock}</td>
               <td>
-                <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                <LinkContainer to={`/admin/product/${productt._id}/edit`}>
                <Button variant='light' className='btn-sm mx-2'><FaEdit color='green'/> Edit</Button>
                 </LinkContainer>
-                <Button variant='light' className='btn-sm mx-2' onClick={()=>deleteHandler(product._id)}><FaTrash color='red'/></Button>
+                <Button variant='light' className='btn-sm mx-2' onClick={()=>deleteHandler(productt._id)}><FaTrash color='red'/></Button>
               </td>
 
             </tr>
@@ -95,6 +98,7 @@ const ProductListScreen = () => {
           }
         </tbody>
       </Table>
+      <Paginate pages={data.pages} page={data.page} isAdmin={true}/>
       </>
     )}
     </>
